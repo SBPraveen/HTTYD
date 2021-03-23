@@ -15,6 +15,3 @@ for(let card of img){
     
 }
 
-
-let mang=10;
-console.log(mang)
