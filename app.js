@@ -15,4 +15,6 @@ for(let card of img){
     
 }
 
-1234
+
+let mang=10;
+console.log(mang)
