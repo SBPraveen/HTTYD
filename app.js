@@ -5,18 +5,26 @@ function createElement(containerNum,name,image,description1,description2){
     containerDiv.classList.add('container1');
     const heading = document.createElement('h1');
     heading.innerText = name;
+    heading.classList.add('containerHeading');
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('imgContainer');
     const img = document.createElement('img');
     img.classList.add("img");
     img.src = image;
     imageContainer.appendChild(img);
+    const knowMoreButton = document.createElement('button');
+    const icon = `<i class='fas fa-angle-double-down'></i>`;
+    knowMoreButton.innerHTML = icon;
+    knowMoreButton.classList.add('knowMoreButton');
     const p1 = document.createElement('p');
+    p1.classList.add('containerP');
     p1.innerText = description1; 
     const p2 = document.createElement('p');
     p2.innerText = description2;
+    p2.classList.add('containerP');
     containerDiv.appendChild(heading); 
     containerDiv.appendChild(imageContainer); 
+    containerDiv.appendChild(knowMoreButton); 
     containerDiv.appendChild(p1); 
     containerDiv.appendChild(p2); 
     if(containerNum === 1){
@@ -25,6 +33,7 @@ function createElement(containerNum,name,image,description1,description2){
     else{
         box2.appendChild(containerDiv);
     }
+
 //image animation
     imageContainer.addEventListener('mousemove',(e)=>{
         let xAxis = (window.innerWidth/2 - e.clientX)/10;
@@ -55,5 +64,43 @@ createElement(`2`,`VALKA`,`valka.jpg`,`Valka is Hiccup's long-lost mother and St
 createElement(`2`,`CLOUDJUMPER`,`cloudJumper.jpg`,`The owl-like Cloudjumper has been Valka's companion of choice for flying and rescuing other dragons over the last twenty years. Cloudjumper's pride, confidence, and large size lead him to think of himself as the top dragon in Valka's mountain fortress, second only to the Bewilderbeast, who is the king of all dragons in the nest.`,`Due to their two decades of experience together, Cloudjumper and Valka share a wordless shorthand when flying. Whereas other dragon riders need to call out commands to turn or shoot, Cloudjumper instinctively knows when Valka wants him to move or attack, adding to their combined mystique and prowess in battle.`);
 createElement(`2`,`LIGHT FURY`,`lightFury.png`,`The Light Fury moves as fast as Toothless and shares his ability to blend into the sky – even during daylight hours.`,`With her white coloration, the Light Fury hides seamlessly in clouds, sea fog, and distant horizons. Although skittish and skeptical, the Light Fury also shares Toothless' deep sense of empathy and will always wield her plasma blast to defend any in need.`);
 
+//mobile view
+const button = document.querySelectorAll('.knowMoreButton');
+const container = document.querySelectorAll('.container1');
+const containerP = document.querySelectorAll('.containerP');
+for(let i=0; i<button.length; i++){
+    button[i].addEventListener('focus',(e)=>
+    {
+        button[i].style.color = `transparent` ;
+        button[i].style.fontSize = `0` ;
+        container[i].style.height = '80vh' ;
+        container[i].style.overflowY = 'scroll' ;
+        containerP[2*i].style.display = 'block';
+        containerP[2*i+1].style.display = 'block';
+    },true) 
+    button[i].addEventListener('blur',(e)=>
+    {
+        button[i].style.color = `rgba(255, 255, 255, 0.6)` ;
+        button[i].style.fontSize = `2.2rem` ;
+        button[i].style.transition='all 0.5s ease'; 
+        container[i].style.overflowY = 'hidden' ;
+        container[i].style.height = '45vh' ;
+        containerP[2*i].style.display = 'none';
+        containerP[2*i+1].style.display = 'none';
+    },true) 
+   
+}
+
+    // mobile view container heading font size change
+    let nam = document.querySelectorAll(".containerHeading");
+
+    for (let j of nam){
+        if(j.innerText.length>12 && window.innerWidth<=600){
+            j.style.fontSize = '1.5rem';
+            var r1 = j.parentElement;//getting the parent element of the heading which has character count  >12
+            r1.childNodes[2].style.marginTop = '0.3rem';
+        }
+        
+    }
 
 
